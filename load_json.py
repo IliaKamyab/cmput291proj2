@@ -39,8 +39,3 @@ def random():
                             {"authors":{"$in":[re.compile(x,re.IGNORECASE) for x in lst]}},
                             {"venue":{"$in":[re.compile(x,re.IGNORECASE) for x in lst]}},
                             {"year":{"$in":int_list}}]},{"references":0,"n_citation":0,"references":0,"authors":0,"abstract":0,"_id":0})
-                            
-
-
-
-

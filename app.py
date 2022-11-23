@@ -1,6 +1,7 @@
 import re
 from load_json import load 
-
+from add_article import add_article
+from list_venues import list_venues
 
 def article_search(db):
     keywords = input("Enter keywords: ").split(" ")
@@ -160,7 +161,7 @@ def add_article(db):
     db.dblp.insert_one(new_article)
 
 
-def main():
+if __name__ == "__main__":
     #in_file = input("Enter a file for data input:")
     #port = input("Enter a port number:")
     in_file,port = 'dblp-ref-10.json', 27017
@@ -169,17 +170,3 @@ def main():
     main_screen(db)
     #add_article(db,"1234","test1",["author11","author12"],2020)
     #add_article(db,"1234","test2",["author21","author22"],2020)
-    
-
-
-
-
-    
-
-main()
-
-
-
-
-
-    

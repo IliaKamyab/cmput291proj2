@@ -31,10 +31,7 @@ def add_authors():
     return authors
 
 
-def main():
+if __name__ == "__main__":
     in_file, port = 'dblp-ref-10.json', 27017
     db = load(in_file, port)
     add_article(db)
-
-
-main()
