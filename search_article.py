@@ -146,8 +146,6 @@ def main_screen(db):
 
 
 def add_article(db):
-    
-
     aid = input("Enter article id: ")
     count = db.dblp.count_documents({"id":aid})
     if count >0:

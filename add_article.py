@@ -2,10 +2,8 @@ import pymongo
 from load_json import load
 
 
-def add_article():
+def add_article(db):
     ids = []
-    in_file, port = 'dblp-ref-10.json', 27017
-    db = load(in_file, port)
     mycol = db["dblp"]
     for x in mycol.find({}, {"id": 1}):
         ids.append(x["id"])
@@ -34,12 +32,15 @@ def add_authors():
 
 
 def main():
-    add_article()
     in_file, port = 'dblp-ref-10.json', 27017
     db = load(in_file, port)
-    mycol = db["dblp"]
+    add_article(db)
+
+    #mycol = db["dblp"]
+    '''
     for x in mycol.find({}, {"authors": 1, }):
         print(x)
+    '''
 
 
 main()
