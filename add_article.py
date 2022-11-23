@@ -28,7 +28,7 @@ def add_authors():
 
     # iterating till the range
     for i in range(0, n):
-        author = (input("Enter author name: "))
+        author = input("Enter author name: ")
         authors.append(author)
     return authors
 
