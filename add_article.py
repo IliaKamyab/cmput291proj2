@@ -36,11 +36,5 @@ def main():
     db = load(in_file, port)
     add_article(db)
 
-    #mycol = db["dblp"]
-    '''
-    for x in mycol.find({}, {"authors": 1, }):
-        print(x)
-    '''
-
 
 main()
