@@ -131,7 +131,7 @@ def author_selection(db, a_dict):
         main_screen(db)
     
 def main_screen(db):
-    choice = input("1. Search for articles\n2. Search for authors\n3. Add Article\n4. Exit\n")
+    choice = input("1. Search for articles\n2. Search for authors\n3. Add Article\n4. List venues\n5. Exit\n")
     if choice == "1":
         article_search_all(db)
     elif choice == "2":
@@ -139,7 +139,10 @@ def main_screen(db):
     elif choice == "3":
         add_article(db)
         main_screen(db)
-    elif choice =="4":
+    elif choice == "4":
+        list_venues(db)
+        main_screen(db)
+    elif choice =="5":
         print("Exiting...")
         quit()
     else:
@@ -147,19 +150,19 @@ def main_screen(db):
         main_screen(db)
 
 
-def add_article(db):
-    aid = input("Enter article id: ")
-    count = db.dblp.count_documents({"id":aid})
-    if count >0:
-        print("Article with id already exists")
-        add_article(db)
-        return
-    authors = input("Enter authors: ").split(",")
-    print(authors)
-    title = input("Enter title: ")
-    year = int(input("Enter year: "))
-    new_article = {"id":aid,"title":title,"authors":authors,"year":year,"n_citation":0,"references":[],"venue":None,"abstract":None}
-    db.dblp.insert_one(new_article)
+# def add_article(db):
+#     aid = input("Enter article id: ")
+#     count = db.dblp.count_documents({"id":aid})
+#     if count >0:
+#         print("Article with id already exists")
+#         add_article(db)
+#         return
+#     authors = input("Enter authors: ").split(",")
+#     print(authors)
+#     title = input("Enter title: ")
+#     year = int(input("Enter year: "))
+#     new_article = {"id":aid,"title":title,"authors":authors,"year":year,"n_citation":0,"references":[],"venue":None,"abstract":None}
+#     db.dblp.insert_one(new_article)
 
 def connect(port):
     port = int(port)

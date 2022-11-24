@@ -31,12 +31,12 @@ def get_top_venues(n: int, db):
 
     return venues
 
-def print_venues(venues: list) -> None:
+def print_venues(venues) -> None:
     return
 
-def list_venues() -> None:
+def list_venues(db) -> None:
     n = get_input()
-    venues = get_top_venues()
+    venues = get_top_venues(n, db)
     print_venues(venues)
 
 if __name__ == "__main__":
