@@ -1,7 +1,6 @@
 import pymongo
 from load_json import load
 
-
 def add_article(db):
     ids = []
     mycol = db["dblp"]
@@ -22,16 +21,17 @@ def add_article(db):
 def add_authors():
     authors = []
     # number of elements as input
-    n = int(input("Enter number of authors: "))
+    n = input("Enter number of authors: ")
+    is_int = False
+    while not is_int:
+        try:
+            n = int(n)
+            is_int = True
+        except:
+            n = input("Not an integer. Enter number of authors again: ")
 
     # iterating till the range
     for i in range(0, n):
         author = input("Enter author name: ")
         authors.append(author)
     return authors
-
-
-if __name__ == "__main__":
-    in_file, port = 'dblp-ref-10.json', 27017
-    db = load(in_file, port)
-    add_article(db)
