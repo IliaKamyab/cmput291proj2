@@ -23,7 +23,7 @@ def list_venues(db) -> None:
         {"$unwind": "$ids"},
         {"$lookup": {
             "from": "dblp",
-            "let": {"id":"$ids","referecnes":"$references"},
+            "let": {"id":"$ids"},
             "pipeline": [
                 
                 {"$match":
