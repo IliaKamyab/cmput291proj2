@@ -1,3 +1,4 @@
+from pymongo import MongoClient
 import re
 from load_json import load 
 from add_article import add_article
@@ -160,13 +161,17 @@ def add_article(db):
     new_article = {"id":aid,"title":title,"authors":authors,"year":year,"n_citation":0,"references":[],"venue":None,"abstract":None}
     db.dblp.insert_one(new_article)
 
+def connect(port):
+    port = int(port)
+    client = MongoClient('localhost', port)
+
+    db = client["291db"]
+    return db
 
 if __name__ == "__main__":
-    #in_file = input("Enter a file for data input:")
-    #port = input("Enter a port number:")
-    in_file,port = 'dblp-ref-10.json', 27017
-    db = load(in_file, port)
-    
+    port = input("Enter the port number to connect: ")
+    db = connect(port)
+
     main_screen(db)
     #add_article(db,"1234","test1",["author11","author12"],2020)
     #add_article(db,"1234","test2",["author21","author22"],2020)

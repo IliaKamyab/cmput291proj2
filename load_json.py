@@ -1,3 +1,4 @@
+import pymongo
 from pymongo import MongoClient
 import json
 import re
@@ -15,7 +16,7 @@ def load(file, port):
     for line in f:
         dblp.insert_one(json.loads(line))
     f.close()
-    return db
+    client.close()
 
 
 #db.dblp.find({"or": [{"year":2013},{"year":2014}]})
