@@ -151,18 +151,7 @@ def main_screen(db):
 
 
 # def add_article(db):
-#     aid = input("Enter article id: ")
-#     count = db.dblp.count_documents({"id":aid})
-#     if count >0:
-#         print("Article with id already exists")
-#         add_article(db)
-#         return
-#     authors = input("Enter authors: ").split(",")
-#     print(authors)
-#     title = input("Enter title: ")
-#     year = int(input("Enter year: "))
-#     new_article = {"id":aid,"title":title,"authors":authors,"year":year,"n_citation":0,"references":[],"venue":None,"abstract":None}
-#     db.dblp.insert_one(new_article)
+#     
 
 def connect(port):
     port = int(port)
