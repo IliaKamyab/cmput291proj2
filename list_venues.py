@@ -14,32 +14,34 @@ def get_input() -> int:
     return venue_count
 
 def get_top_venues(n: int, db):
-    # get number of papers in venue
+    # sort venues by number of papers that have venue in references (references field -> list of objectIDs of papers)
+    # get number of papers in venue (venue field)
     venues = db.dblp.aggregate([
         {
             "$group": { 
                 "_id": "$venue", 
-                "count": {"$sum": 1}
+                "count": {"$sum": 1},
+                "papers": {"$push": "$id"},
             }
         },
         {
-            "$sort":{'count':1}
-        },
-        {
-            "$limit": n
+            "$sort":{'count':-1}
         }
     ])
+
     return venues
 
-def print_venues(venues: list) -> None:
+def print_venues(venues) -> None:
     return
 
-def list_venues() -> None:
-    return
+def list_venues(db) -> None:
+    n = get_input()
+    venues = get_top_venues(n, db)
+    print_venues(venues)
 
 if __name__ == "__main__":
     print(get_input())
     db = load('dblp-ref-10.json', 27017)
-    venues = get_top_venues(3, db)
+    venues = get_top_venues(10, db)
     for thing in venues:
-        print(thing)
+        print(thing["_id"], "Refs:", thing["papers"])

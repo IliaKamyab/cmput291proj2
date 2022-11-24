@@ -1,3 +1,4 @@
+from pymongo import MongoClient
 import re
 from load_json import load 
 from add_article import add_article
@@ -130,7 +131,7 @@ def author_selection(db, a_dict):
         main_screen(db)
     
 def main_screen(db):
-    choice = input("1. Search for articles\n2. Search for authors\n3. Add Article\n4. Exit\n")
+    choice = input("1. Search for articles\n2. Search for authors\n3. Add Article\n4. List venues\n5. Exit\n")
     if choice == "1":
         article_search_all(db)
     elif choice == "2":
@@ -138,36 +139,42 @@ def main_screen(db):
     elif choice == "3":
         add_article(db)
         main_screen(db)
-    elif choice =="4":
+    elif choice == "4":
+        list_venues(db)
+        main_screen(db)
+    elif choice =="5":
         print("Exiting...")
         quit()
     else:
         print("Invalid choice")
         main_screen(db)
 
-'''
-def add_article(db):
-    aid = input("Enter article id: ")
-    count = db.dblp.count_documents({"id":aid})
-    if count >0:
-        print("Article with id already exists")
-        add_article(db)
-        return
-    authors = input("Enter authors: ").split(",")
-    print(authors)
-    title = input("Enter title: ")
-    year = int(input("Enter year: "))
-    new_article = {"id":aid,"title":title,"authors":authors,"year":year,"n_citation":0,"references":[],"venue":None,"abstract":None}
-    db.dblp.insert_one(new_article)
-'''
 
+# def add_article(db):
+#     aid = input("Enter article id: ")
+#     count = db.dblp.count_documents({"id":aid})
+#     if count >0:
+#         print("Article with id already exists")
+#         add_article(db)
+#         return
+#     authors = input("Enter authors: ").split(",")
+#     print(authors)
+#     title = input("Enter title: ")
+#     year = int(input("Enter year: "))
+#     new_article = {"id":aid,"title":title,"authors":authors,"year":year,"n_citation":0,"references":[],"venue":None,"abstract":None}
+#     db.dblp.insert_one(new_article)
+
+def connect(port):
+    port = int(port)
+    client = MongoClient('localhost', port)
+
+    db = client["291db"]
+    return db
 
 if __name__ == "__main__":
-    #in_file = input("Enter a file for data input:")
-    #port = input("Enter a port number:")
-    in_file,port = 'dblp-ref-10.json', 27017
-    db = load(in_file, port)
-    
+    port = input("Enter the port number to connect: ")
+    db = connect(port)
+
     main_screen(db)
     #add_article(db,"1234","test1",["author11","author12"],2020)
     #add_article(db,"1234","test2",["author21","author22"],2020)
